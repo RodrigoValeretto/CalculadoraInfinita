@@ -14,6 +14,12 @@
 
 int main()
 {
+	printf("Calculadora de Binarios Infinita\n");
+
+	Tipo_Lista elemento;
+	Tipo_Lista temp;
+
+	printf("Digite os dois primeiros digitos a serem somados:\n");
 	
 
 	return 0;
