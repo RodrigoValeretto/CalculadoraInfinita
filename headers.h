@@ -1,7 +1,10 @@
-typedef struct
+typedef struct Lista
 {
-	Tipo_Lista *next;
+	struct Lista * next;
 	char valor;
 
-
 }Tipo_Lista;
+
+Tipo_Lista * crialistas();
+
+int somaentradas(int, Tipo_Lista *, Tipo_Lista *);

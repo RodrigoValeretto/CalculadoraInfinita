@@ -15,12 +15,20 @@
 int main()
 {
 	printf("Calculadora de Binarios Infinita\n");
+	Tipo_Lista *Elem;										//Declaração de variáveis
+	Tipo_Lista *Temp;
+	int ent;
 
-	Tipo_Lista elemento;
-	Tipo_Lista temp;
+	Elem = crialistas();									//Recebendo as listas criadas pela função
+	Temp = crialistas();									//nos ponteiros elem e temp
 
-	printf("Digite os dois primeiros digitos a serem somados:\n");
-	
+
+	printf("Digite o numero de entradas que serao feitas:\n");
+	scanf("%d",&ent);										//Recebe o numero de entradas
+
+	somaentradas(ent, Elem, Temp);
+
+
 
 	return 0;
 }
