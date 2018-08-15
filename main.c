@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "headers.h"
 /*
 #########################################
 #  Calculadora Infinita em C 		 	#
@@ -15,7 +15,6 @@
 int main()
 {
 	
-
 
 	return 0;
 }
