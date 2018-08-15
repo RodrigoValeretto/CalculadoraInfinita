@@ -26,7 +26,7 @@ int main()
 	printf("Digite o numero de entradas que serao feitas:\n");
 	scanf("%d",&ent);										//Recebe o numero de entradas
 
-	somaentradas(ent, Elem, Temp);
+	somaentradas(ent, Elem, Temp);							//Função que recebe e soma as entradas
 
 
 
