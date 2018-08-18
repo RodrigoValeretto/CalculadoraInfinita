@@ -10,22 +10,24 @@ Tipo_Lista * crialistas()
 
 void verificafinal(int tam, Tipo_Lista * Elem, Tipo_Lista * inicioE)	//Função que verifica o numero mais significativo da entrada
 {
+    Tipo_Lista *Aux;
 	for (int i = 0; i < tam; i++)
 	{
 		Elem = inicioE;
-		while(1)
-		{
-
-			if (Elem->valor == 0 && Elem->next == NULL)
-			{
-				free(Elem);
-				break;
-			}else{
-				Elem = Elem->next;
-				if(Elem->next == NULL)
-					{break;}
-			}
-		}
+		Aux = inicioE;
+		while(Elem->next!=NULL)
+        {
+            Elem = Elem->next;
+        }
+        while(Aux->next!=Elem)
+        {
+            Aux = Aux->next;
+        }
+        if(Elem->valor == 0)
+        {
+            free(Elem);
+            Aux->next = NULL;
+        }else{break;}
 
 	}
 	return;
@@ -49,24 +51,26 @@ int somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para re
 	{
 		printf("Digite o tamanho da entrada %d\n",j);
 		scanf("%d",&tam);			//Recebe o tamanho da entrada
-		
+
 		fflush(stdin);				//Limpa o buffer do teclado
 		printf("Digite o valor do binario:\n");
-		for(i = 0;i < tam; i++)		//For utilizado para colocar todos os elementos em uma lista encadeada	
+		for(i = 0;i < tam; i++)		//For utilizado para colocar todos os elementos em uma lista encadeada
 		{
 			scanf("%c",&c);			//Variavel de suporte criada para receber a string da entrada
 
 			Elem->valor = atoi(&c);	//Função que transforma a entrada em int e atribui ao valor do elemento da lista
-			
-			if(i!=(tam-1))
+
+			if(i!=(tam-1))			//Aloca memoria para o proximo elemento caso ele exista
 			{
 				Elem->next = (Tipo_Lista*)calloc(1,sizeof(Tipo_Lista));
 				Elem = Elem->next;
+			}else{
+                Elem->next = NULL;
 			}
 
 		}
 
-		verificafinal(tam, Elem, inicioE);
+		verificafinal(tam, Elem, inicioE);	//Verifica o número mais significativo da entrada
 
 		Elem = inicioE;
 		while(Elem != NULL)
@@ -74,8 +78,7 @@ int somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para re
 			printf("*%d", Elem->valor);
 			Elem = Elem->next;
 		}
-		
-		Temp->valor = Temp->valor + Elem->valor;
+
 
 	}
 	return 0;
