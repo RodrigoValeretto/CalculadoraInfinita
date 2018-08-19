@@ -8,7 +8,7 @@ Tipo_Lista * crialistas()
 	return elemento;
 }
 
-void verificafinal(int tam, Tipo_Lista * Elem, Tipo_Lista * inicioE)	//Função que verifica o numero mais significativo da entrada
+Tipo_Lista * verificafinal(int tam, Tipo_Lista * Elem, Tipo_Lista * inicioE)	//Função que verifica o numero mais significativo da entrada
 {
     Tipo_Lista *Aux;						//Criação de função auxiliar para apontar para NULL
 	for (int i = 0; i < tam; i++)			//Laço responsável por remover vários zeros no fim da entrada
@@ -19,24 +19,31 @@ void verificafinal(int tam, Tipo_Lista * Elem, Tipo_Lista * inicioE)	//Função 
         {
             Elem = Elem->next;
         }
-        if(tam != 1)
+
+        while(Aux->next != Elem)			//While que posiciona o auxiliar um elemento antes do ultimo da lista
         {
-            while(Aux->next!=Elem)			//While que posiciona o auxiliar um elemento antes do ultimo da lista
+
+            if(tam == 1 || Aux == NULL)
             {
+                break;
+            }else{
                 Aux = Aux->next;
             }
-        }else{
-            break;
         }
 
-        if(Elem->valor == 0)				//Condicional para remover elemento caso ele for 0
+        if(Elem->valor == 0)			    //Condicional para remover elemento caso ele for 0
         {
-            free(Elem);						//Liberação de memória
-            Aux->next = NULL;				//e ponteiro next sendo apontado para NULL
+            free(Elem);                     //Liberação de memória
+            Aux->next = NULL;               //e ponteiro next sendo apontado para NULL
+            if(tam == 1)
+            {
+                Elem = NULL;                //Caso específico para quando houver apenas 0 como elemento
+                inicioE = NULL;
+            }
         }
 
 	}
-	return;
+	return inicioE;
 }
 
 
@@ -58,6 +65,7 @@ int somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para re
         Elem = inicioE;					//ponteiros apontam inicialmente
 
 		printf("Digite o tamanho da entrada %d\n",j);
+		fflush(stdin);
 		scanf("%d",&tam);			//Recebe o tamanho da entrada
 
 		fflush(stdin);				//Limpa o buffer do teclado
@@ -78,9 +86,9 @@ int somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para re
 
 		}
 
-		verificafinal(tam, Elem, inicioE);	//Verifica o número mais significativo da entrada
+		inicioE = verificafinal(tam, Elem, inicioE);	//Verifica o número mais significativo da entrada
 
-		Elem = inicioE;
+        Elem = inicioE;
 		while(Elem != NULL)
 		{
 			printf("*%d", Elem->valor);
