@@ -23,11 +23,14 @@ Tipo_Lista * verificafinal(int tam, Tipo_Lista * Elem, Tipo_Lista * inicioE)	//F
         while(Aux->next != Elem)			//While que posiciona o auxiliar um elemento antes do ultimo da lista
         {
 
-            if(tam == 1 || Aux == NULL)
+            if(tam == 1 || Aux == NULL)		//If responsável por quebrar o laço caso o tamanho da entrada seja 1 ou Aux aponte para NULL
             {
                 break;
             }else{
-                Aux = Aux->next;
+                if(i != (tam-1))
+                {
+                    Aux = Aux->next;
+                }else{break;}
             }
         }
 
@@ -36,18 +39,15 @@ Tipo_Lista * verificafinal(int tam, Tipo_Lista * Elem, Tipo_Lista * inicioE)	//F
             free(Elem);                     //Liberação de memória
             Aux->next = NULL;               //e ponteiro next sendo apontado para NULL
             if(tam == 1)
-            {
-                Elem = NULL;                //Caso específico para quando houver apenas 0 como elemento
-                inicioE = NULL;
-            }
+            {inicioE = NULL;}               //Caso especial para o zero
         }
 
 	}
-	return inicioE;
+	return inicioE;							//Retorno da função
 }
 
 
-int somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para receber e somar as entradas
+void somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para receber e somar as entradas
 {
 	int i=0;						//Declaração de Variáveis
 	int j=0;
@@ -81,51 +81,36 @@ int somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para re
 				Elem->next = (Tipo_Lista*)calloc(1,sizeof(Tipo_Lista));
 				Elem = Elem->next;
 			}else{
-                Elem->next = NULL;
+                Elem->next = NULL;	//Caso o prox elemento não seja necessario, o ponteiro é direcionado a NULL
 			}
 
 		}
 
 		inicioE = verificafinal(tam, Elem, inicioE);	//Verifica o número mais significativo da entrada
 
-        Elem = inicioE;
-		while(Elem != NULL)
-		{
-			printf("*%d", Elem->valor);
-			Elem = Elem->next;
-		}
-
 		i=0;
-        Elem = inicioE;
-		while(Elem != NULL || Temp != NULL)
+        Elem = inicioE;									//Reposiciona o ponteiro em seu inicio
+		while(Elem != NULL || Temp != NULL)				//While responsável por realizar a soma dos binários
 		{
-			if(Elem == NULL)
+			if(Elem == NULL)							//Caso o elemento a ser somado seja NULL
 			{
-				vaium = (Temp->valor + vaium);
+				vaium = (Temp->valor + vaium);			
 				Temp->valor = (vaium % 2);
 				vaium = (vaium / 2);
-			}else{
-				vaium = (Temp->valor + Elem->valor + vaium);
+			}else{										//Caso o elem esteja preenchido
+				vaium = (Temp->valor + Elem->valor + vaium);	
 				Temp->valor = (vaium % 2);
 				vaium = (vaium / 2);
 				Elem = Elem->next;
 			}
 
-			if((Elem != NULL || vaium != 0) && Temp->next == NULL)
+			if((Elem != NULL || vaium != 0) && Temp->next == NULL)	//If responsável por alocar memória para o buffer temp que soma o resultado
 			{
 				Temp->next = (Tipo_Lista*)calloc(1,sizeof(Tipo_Lista));
 			}
-				Temp = Temp->next;
+			Temp = Temp->next;							//Avança o ponteiro Temp para o próximo
 		}
-
-		Temp = inicioT;
-		while(Temp != NULL)
-		{
-			printf("\n**%d", Temp->valor);
-			Temp = Temp->next;
-		}
-
 
 	}
-	return 0;
+	return;
 }
