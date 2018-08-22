@@ -74,7 +74,7 @@ void somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para r
 		{
 			scanf("%c",&c);			//Variavel de suporte criada para receber a string da entrada
 
-			Elem->valor = c - '0';	//Função que transforma a entrada em int e atribui ao valor do elemento da lista
+			Elem->valor = (c - '0');	//Função que transforma a entrada em int e atribui ao valor do elemento da lista
 
 			if(i!=(tam-1))			//Aloca memoria para o proximo elemento caso ele exista
 			{
@@ -94,11 +94,11 @@ void somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para r
 		{
 			if(Elem == NULL)							//Caso o elemento a ser somado seja NULL
 			{
-				vaium = (Temp->valor + vaium);			
+				vaium = (Temp->valor + vaium);
 				Temp->valor = (vaium % 2);
 				vaium = (vaium / 2);
 			}else{										//Caso o elem esteja preenchido
-				vaium = (Temp->valor + Elem->valor + vaium);	
+				vaium = (Temp->valor + Elem->valor + vaium);
 				Temp->valor = (vaium % 2);
 				vaium = (vaium / 2);
 				Elem = Elem->next;
@@ -117,13 +117,35 @@ void somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para r
 
 void liberamemoria(Tipo_Lista *Elem, Tipo_Lista *inicioE)	//Função responsável por liberar a memoria dos elementos da lista encadeada
 {
-	Elem = inicioE;							//Atribui ao ponteiro Elem sua posição inicial
+    Tipo_Lista *Aux;
+    while(Elem != NULL)
+    {
+        Elem = inicioE;							//Atribui ao ponteiro Elem e Aux a posição inicial do Elem
+        Aux = inicioE;
 
-	while(Elem != NULL)						//While que roda até que Elem aponte para NULL
-	{
-		free(Elem);							//Libera Elem
-		Elem = Elem->next;					//Avança para o próximo da lista
-	}
+        while(Elem->next != NULL)						//While que roda até que Elem aponte para NULL
+        {
+            Elem = Elem->next;					//Avança para o próximo da lista
+        }
+        while(Aux->next != Elem)
+        {
+            if(Aux->next == NULL)
+            {
+                break;
+            }
+            Aux = Aux->next;
+        }
 
-	return;
+        free(Elem);
+        if(Aux->next != NULL)
+        {
+            Aux->next = NULL;
+        }
+        if(Elem == inicioE)
+        {
+            break;
+        }
+
+    }
+    return;
 }

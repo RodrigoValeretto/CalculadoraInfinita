@@ -24,7 +24,7 @@ int main()
 
 	Elem = crialistas();									//Recebendo as listas criadas pela função
 	Temp = crialistas();									//nos ponteiros elem e temp
-	
+
 	inicioT = Temp;											//Salvando o inicio das listas em outros ponteiros
 	inicioE = Elem;
 
@@ -36,7 +36,7 @@ int main()
 	while(Temp != NULL)
 	{
 		cont++;												//While responsável por contar o número de digitos da saída
-		Temp = Temp->next;			
+		Temp = Temp->next;
 	}
 	printf("%d ", cont);									//Print da saída
 
@@ -47,8 +47,9 @@ int main()
 		Temp = Temp->next;
 	}
 
-	liberamemoria(Elem, inicioE);							//Funções para liberar memoria alocada para os elementos das listas
-	liberamemoria(Temp, inicioT);
+	liberamemoria(Temp, inicioT);							//Funções para liberar memoria alocada para os elementos das listas
+
+    liberamemoria(Elem, inicioE);
 
 	return 0;												//Final do programa
 }
