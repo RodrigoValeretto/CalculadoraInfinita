@@ -24,7 +24,9 @@ int main()
 
 	Elem = crialistas();									//Recebendo as listas criadas pela função
 	Temp = crialistas();									//nos ponteiros elem e temp
-	inicioT = Temp;
+	
+	inicioT = Temp;											//Salvando o inicio das listas em outros ponteiros
+	inicioE = Elem;
 
 	printf("Digite o numero de entradas que serao feitas:\n");
 	scanf("%d",&ent);										//Recebe o numero de entradas
