@@ -74,7 +74,7 @@ void somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para r
 		{
 			scanf("%c",&c);			//Variavel de suporte criada para receber a string da entrada
 
-			Elem->valor = atoi(&c);	//Função que transforma a entrada em int e atribui ao valor do elemento da lista
+			Elem->valor = c - '0';	//Função que transforma a entrada em int e atribui ao valor do elemento da lista
 
 			if(i!=(tam-1))			//Aloca memoria para o proximo elemento caso ele exista
 			{
@@ -112,5 +112,18 @@ void somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para r
 		}
 
 	}
+	return;
+}
+
+void liberamemoria(Tipo_Lista *Elem, Tipo_Lista *inicioE)	//Função responsável por liberar a memoria dos elementos da lista encadeada
+{
+	Elem = inicioE;							//Atribui ao ponteiro Elem sua posição inicial
+
+	while(Elem != NULL)						//While que roda até que Elem aponte para NULL
+	{
+		free(Elem);							//Libera Elem
+		Elem = Elem->next;					//Avança para o próximo da lista
+	}
+
 	return;
 }

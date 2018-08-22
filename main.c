@@ -18,6 +18,7 @@ int main()
 	Tipo_Lista *Elem;										//Declaração de variáveis
 	Tipo_Lista *Temp;
 	Tipo_Lista *inicioT;
+	Tipo_Lista *inicioE;
 	int ent;
 	int cont=0;
 
@@ -44,6 +45,8 @@ int main()
 		Temp = Temp->next;
 	}
 
+	liberamemoria(Elem, inicioE);							//Funções para liberar memoria alocada para os elementos das listas
+	liberamemoria(Temp, inicioT);
 
 	return 0;												//Final do programa
 }
