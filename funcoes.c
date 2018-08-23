@@ -118,33 +118,28 @@ void somaentradas(int ent, Tipo_Lista *Elem, Tipo_Lista *Temp)	//Função para r
 void liberamemoria(Tipo_Lista *Elem, Tipo_Lista *inicioE)	//Função responsável por liberar a memoria dos elementos da lista encadeada
 {
     Tipo_Lista *Aux;
-    while(Elem != NULL)
+    while(1)
     {
-        Elem = inicioE;							//Atribui ao ponteiro Elem e Aux a posição inicial do Elem
+        Elem = inicioE;							            //Atribui ao ponteiro Elem e Aux a posição inicial do Elem
         Aux = inicioE;
 
-        while(Elem->next != NULL)						//While que roda até que Elem aponte para NULL
+        while(Elem->next != NULL)				            //While que roda até que Elem aponte para NULL
         {
-            Elem = Elem->next;					//Avança para o próximo da lista
+            Elem = Elem->next;					            //Avança para o próximo da lista
         }
-        while(Aux->next != Elem)
+        while(Aux->next != Elem && Aux->next != NULL)       //Posiciona o ponteiro auxiliar um elemento antes do local para onde o ponteiro Elem aponta
         {
-            if(Aux->next == NULL)
-            {
-                break;
-            }
             Aux = Aux->next;
         }
-
-        free(Elem);
-        if(Aux->next != NULL)
+        if(Aux->next != NULL)                               //Atribui NULL para o ponteiro prox de onde vai ser liberada a memória
         {
             Aux->next = NULL;
         }
-        if(Elem == inicioE)
+        if(Elem == inicioE)                                 //Confere se o ponteiro aponta para o inicio, se sim, finaliza o laço e a função
         {
             break;
         }
+        free(Elem);                                         //Libera memória alocada para um elemento
 
     }
     return;
