@@ -9,7 +9,7 @@ typedef struct Lista
 
 Tipo_Lista * crialistas();
 
-void somaentradas(int, Tipo_Lista *, Tipo_Lista *);
+int somaentradas(int, Tipo_Lista *, Tipo_Lista *);
 
 Tipo_Lista * verificafinal(int, Tipo_Lista *, Tipo_Lista *);
 
